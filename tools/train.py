@@ -21,6 +21,9 @@ from mmdet.utils import (collect_env, get_device, get_root_logger,
                          replace_cfg_vals, rfnext_init_model,
                          setup_multi_processes, update_data_root)
 
+import os
+# os.environ['CUDA_VISIBLE_DEVICES']="0,1,2,3,4,5,6,7"
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a detector')
@@ -174,6 +177,8 @@ def main():
         _, world_size = get_dist_info()
         cfg.gpu_ids = range(world_size)
 
+
+    # runner.load_checkpoint(cfg.load_from, map_location=lambda storage, loc: storage.cuda(4)) 
     # create work_dir
     mmcv.mkdir_or_exist(osp.abspath(cfg.work_dir))
     # dump config

@@ -180,10 +180,19 @@ def draw_masks(ax, img, masks, color=None, with_edge=True, alpha=0.8):
         ndarray: The result image.
     """
     taken_colors = set([0, 0, 0])
-    if color is None:
-        random_colors = np.random.randint(0, 255, (masks.size(0), 3))
-        color = [tuple(c) for c in random_colors]
-        color = np.array(color, dtype=np.uint8)
+    # if color is None:
+    #     random_colors = np.random.randint(0, 255, (masks.size(0), 3))
+    #     color = [tuple(c) for c in random_colors]
+    #     color = np.array(color, dtype=np.uint8)
+    if color[0][0] !=220:
+        g_colors = []
+        import random
+        for i in range(len(color)):
+            each_i = tuple(random.randint(0, 254) for _ in range(3))
+            g_colors.append(each_i)
+        color = np.array(g_colors, dtype=np.uint8)
+    
+
     polygons = []
     for i, mask in enumerate(masks):
         if with_edge:
@@ -321,9 +330,11 @@ def imshow_det_bboxes(img,
 
     if segms is not None:
         mask_palette = get_palette(mask_color, max_label + 1)
+        # import pdb
+        # pdb.set_trace()
         colors = [mask_palette[label] for label in labels]
         colors = np.array(colors, dtype=np.uint8)
-        draw_masks(ax, img, segms, colors, with_edge=True)
+        draw_masks(ax, img, segms, colors, with_edge=False)#with_edge=True
 
         if num_bboxes < segms.shape[0]:
             segms = segms[num_bboxes:]
@@ -388,8 +399,8 @@ def imshow_gt_det_bboxes(img,
                          det_bbox_color=(241, 101, 72),
                          det_text_color=(200, 200, 200),
                          det_mask_color=(241, 101, 72),
-                         thickness=2,
-                         font_size=13,
+                         thickness=0.01,#2
+                         font_size=6,#13
                          win_name='',
                          show=True,
                          wait_time=0,

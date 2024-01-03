@@ -16,11 +16,15 @@ from .resnext import ResNeXt
 from .ssd_vgg import SSDVGG
 from .swin import SwinTransformer
 from .trident_resnet import TridentResNet
+from .maxvit import MaxViT
+from .maxvit_ms_dct import MaxViT_MS_DCT
+from .maxvit_dct import MaxViT_DCT
+from .maxvit_ms import MaxViT_MS
 
 __all__ = [
     'RegNet', 'ResNet', 'ResNetV1d', 'ResNeXt', 'SSDVGG', 'HRNet',
     'MobileNetV2', 'Res2Net', 'HourglassNet', 'DetectoRS_ResNet',
     'DetectoRS_ResNeXt', 'Darknet', 'ResNeSt', 'TridentResNet', 'CSPDarknet',
     'SwinTransformer', 'PyramidVisionTransformer',
-    'PyramidVisionTransformerV2', 'EfficientNet'
+    'PyramidVisionTransformerV2', 'EfficientNet', 'MaxViT', 'MaxViT_DCT', 'MaxViT_MS_DCT', 'MaxViT_MS'
 ]

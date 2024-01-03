@@ -122,6 +122,11 @@ class ResultVisualizer:
             fname, name = osp.splitext(osp.basename(filename))
             save_filename = fname + '_' + str(round(performance, 3)) + name
             out_file = osp.join(out_dir, save_filename)
+            ######################
+            import random
+            random_color = [tuple(random.randint(0, 254) for _ in range(3))]
+            # print('1111111',random_color)
+
             imshow_gt_det_bboxes(
                 data_info['img'],
                 data_info,
@@ -132,7 +137,8 @@ class ResultVisualizer:
                 gt_mask_color=dataset.PALETTE,
                 det_bbox_color=dataset.PALETTE,
                 det_text_color=(200, 200, 200),
-                det_mask_color=dataset.PALETTE,
+                # det_mask_color=dataset.PALETTE,
+                det_mask_color=random_color,
                 show=self.show,
                 score_thr=self.score_thr,
                 wait_time=self.wait_time,

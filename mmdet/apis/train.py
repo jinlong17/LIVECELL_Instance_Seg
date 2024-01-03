@@ -16,6 +16,7 @@ from mmdet.utils import (build_ddp, build_dp, compat_cfg,
                          find_latest_checkpoint, get_root_logger)
 
 
+import pdb
 def init_random_seed(seed=None, device='cuda'):
     """Initialize random seed.
 
@@ -150,7 +151,8 @@ def train_detector(model,
 
     # put model on gpus
     if distributed:
-        find_unused_parameters = cfg.get('find_unused_parameters', False)
+        # find_unused_parameters = cfg.get('find_unused_parameters', False)
+        find_unused_parameters = True
         # Sets the `find_unused_parameters` parameter in
         # torch.nn.parallel.DistributedDataParallel
         model = build_ddp(
@@ -243,4 +245,5 @@ def train_detector(model,
         runner.resume(cfg.resume_from)
     elif cfg.load_from:
         runner.load_checkpoint(cfg.load_from)
+    # pdb.set_trace()
     runner.run(data_loaders, cfg.workflow)

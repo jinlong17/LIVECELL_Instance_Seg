@@ -7,6 +7,7 @@ from ..builder import DETECTORS, build_backbone, build_head, build_neck
 from .base import BaseDetector
 
 
+import pdb
 @DETECTORS.register_module()
 class TwoStageDetector(BaseDetector):
     """Base class for two-stage detectors.
@@ -149,6 +150,11 @@ class TwoStageDetector(BaseDetector):
                                                  gt_bboxes_ignore, gt_masks,
                                                  **kwargs)
         losses.update(roi_losses)
+
+        # pdb.set_trace()
+        # for name, p in self.roi_head.named_parameters():
+        #     if p.grad is None:
+        #         print('1111111111111111111111111111111111 , ', name)
 
         return losses
 

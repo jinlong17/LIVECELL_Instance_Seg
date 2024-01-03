@@ -391,6 +391,7 @@ class CocoDataset(CustomDataset):
                           logger=None,
                           classwise=False,
                           proposal_nums=(100, 300, 1000),
+                        # proposal_nums=(2000, 300, 2000),
                           iou_thrs=None,
                           metric_items=None):
         """Instance segmentation and object detection evaluation in COCO
@@ -430,7 +431,6 @@ class CocoDataset(CustomDataset):
         if metric_items is not None:
             if not isinstance(metric_items, list):
                 metric_items = [metric_items]
-
         eval_results = OrderedDict()
         for metric in metrics:
             msg = f'Evaluating {metric}...'
@@ -637,7 +637,11 @@ class CocoDataset(CustomDataset):
 
         coco_gt = self.coco
         self.cat_ids = coco_gt.get_cat_ids(cat_names=self.CLASSES)
-
+        # print('22222222222222222222222222222222222222222222', proposal_nums)###########################3
+        nums=2000
+        proposal_nums=(nums, nums, nums)
+        # proposal_nums=(5000, 5000, 5000)
+        # proposal_nums=(500, 500, 500)
         result_files, tmp_dir = self.format_results(results, jsonfile_prefix)
         eval_results = self.evaluate_det_segm(results, result_files, coco_gt,
                                               metrics, logger, classwise,
